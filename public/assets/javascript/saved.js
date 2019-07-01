@@ -15,7 +15,7 @@ $(document).ready(function(){
     function initPage() {
         // Empty article container, run AJAX req for any saved headlines.
         articleContainer.empty();
-        $.get("/api/headlines?saved=true").then(function(data){
+        $.get("/api/headline?saved=true").then(function(data){
             // If we have headlines, render then to page
             if (data && data.length) {
                 renderArticles(data);
@@ -123,11 +123,11 @@ $(document).ready(function(){
     //This function handles deleting article/headlines
     function handleArticleDelete() {
         // We grab the id of the article to delete from the panel element the delete button sits inside.
-        var acrticleToDelete = $(this).parents(".panel").data();
+        var articleToDelete = $(this).parents(".panel").data();
         // Using a delete method
         $.ajax({
             method: "DELETE",
-            url: "/api/headlines/" + acrticleToDelete._id
+            url: "/api/headline/" + articleToDelete._id
         }).then(function(data){
             // If this works out run initpage again which will render our saved list.
             if (data.ok) {
@@ -141,7 +141,7 @@ $(document).ready(function(){
      function handleArticleNotes() {
          var currentArticle = $(this).parents(".panel").data();
          // Grab any notes with this headline/article id.
-         $.get("/api/notes/" + currentArticle._id).then(function(data){
+         $.get("/api/note/" + currentArticle._id).then(function(data){
              //Construct notes modal
              var modalText = [
                  "<div class='container-fluid text-center'>",
@@ -185,7 +185,7 @@ $(document).ready(function(){
                  _id: $(this).data("article")._id,
                  noteText: newNote
              };
-             $.post("/api/notes", noteData).then(function(){
+             $.post("/api/note", noteData).then(function(){
                  // when complete. close the modal
                  bootbox.hideAll();
              });
@@ -199,7 +199,7 @@ $(document).ready(function(){
          var noteToDelete = $(this).data("_id");
          //Perform an DELETE req to "/api/notes/" with the id of the note.
          $.ajax({
-             url: "/api/notes/" + noteToDelete,
+             url: "/api/note/" + noteToDelete,
              method: "DELETE"
          }).then(function(){
              //When done hide the modal

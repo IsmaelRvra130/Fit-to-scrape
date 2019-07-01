@@ -1,5 +1,5 @@
 //Tells page to load my html before my js.
-$(document).read(function(){
+$(document).ready(function(){
     
     //Adding event listeners.
    var articleContainer = $(".article-container");
@@ -12,7 +12,7 @@ $(document).read(function(){
    function initPage() {
        //Empty articles container, run AJAX req for any unsaved headlines.
        articleContainer.empty();
-       $.get("/api/headlines?saved=false")
+       $.get("/api/headline?saved=false")
        .then(function(data){
            //If we have headlines, render to page
            if (data && data.length) {
@@ -48,7 +48,7 @@ $(document).read(function(){
         "<div class='panel-heading'>",
         "<h3>",
         article.headline,
-        "<a class='btn btn-sucess save'>",
+        "<a class='btn btn-success save'>",
         "Save Article",
         "</a>",
         "</h3>",
@@ -90,7 +90,7 @@ $(document).read(function(){
        // Using patch method to update existing records in collection.
        $.ajax({
            method: "PATCH",
-            url: "/api/headlines",
+            url: "/api/headline",
             data: articleToSave
        })
        .then(function(data){
