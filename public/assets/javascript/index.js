@@ -53,12 +53,12 @@ $(document).ready(function(){
         "</a>",
         "</h3>",
         "</div>",
-        "div class='panel-body'>",
+        "<div class='panel-body'>",
         article.summary,
         "</div>",
         "</div>"
         ].join(""));
-        panel.data("_id", article_id);
+        panel.data("_id", article._id);
         return panel;
    }
 

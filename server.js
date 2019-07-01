@@ -3,6 +3,7 @@ var express = require("express");
 var mongoose = require("mongoose");
 var expressHandlebars = require("express-handlebars");
 var bodyParser = require("body-parser");
+var logger = require("morgan");
 
 
 //Set up port.
@@ -29,6 +30,8 @@ app.use(bodyParser.urlencoded({
 
 //Have every request go through router middleware
 app.use(router);
+//Use morgan logger got loggin requests
+app.use(logger("dev"));
 
 //if deployted, use the deployed db. otherwise use the local mongodb
 var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";

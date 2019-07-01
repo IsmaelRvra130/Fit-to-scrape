@@ -10,7 +10,7 @@ var headlineSchema = new Schema({
     },
     summary:{
         type: String,
-        required: true
+        // required: true
     },
     date: String,
     saved: {
